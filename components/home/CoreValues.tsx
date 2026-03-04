@@ -1,0 +1,55 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { coreValues } from "@/lib/data/services";
+
+export default function CoreValues() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="py-20 md:py-28 bg-linen dark:bg-[#3d2a1a]">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
+            Why Choose Us
+          </p>
+          <h2 className="font-playfair font-bold text-soil dark:text-cream text-4xl md:text-5xl">
+            Our Core Values
+          </h2>
+        </div>
+
+        {/* Cards */}
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {coreValues.map((value, i) => (
+            <div
+              key={value.title}
+              className={`group bg-cream dark:bg-soil p-8 border border-harvest/10 hover:border-harvest transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
+                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <span className="text-4xl mb-5 block">{value.icon}</span>
+              <h3 className="font-playfair font-bold text-xl text-soil dark:text-cream mb-3 group-hover:text-harvest transition-colors">
+                {value.title}
+              </h3>
+              <p className="font-raleway text-sm text-stone leading-relaxed">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

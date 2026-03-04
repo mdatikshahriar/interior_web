@@ -1,0 +1,99 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { testimonials } from "@/lib/data/testimonials";
+import { cn } from "@/lib/utils";
+
+export default function Testimonials() {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      setCurrent((c) => (c + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [paused]);
+
+  return (
+    <section
+      className="py-20 md:py-28 bg-soil"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
+            What Clients Say
+          </p>
+          <h2 className="font-playfair font-bold text-cream text-4xl md:text-5xl">
+            Testimonials
+          </h2>
+        </div>
+
+        {/* Slider */}
+        <div ref={ref} className="max-w-3xl mx-auto text-center">
+          <div className="relative min-h-[260px]">
+            {testimonials.map((t, i) => (
+              <div
+                key={t.id}
+                className={cn(
+                  "absolute inset-0 transition-all duration-500 flex flex-col items-center justify-center",
+                  i === current
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 translate-y-4 pointer-events-none"
+                )}
+              >
+                {/* Stars */}
+                <div className="flex gap-1 mb-5">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <span key={j} className="star-filled text-xl">★</span>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="font-playfair text-lg md:text-xl text-cream/90 leading-relaxed italic mb-8">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+
+                {/* Avatar + info */}
+                <div className="flex items-center gap-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-harvest">
+                    <Image src={t.avatar} alt={t.name} fill className="object-cover" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-montserrat text-sm font-semibold text-harvest">
+                      {t.name}
+                    </p>
+                    <p className="font-raleway text-xs text-cream/50">
+                      {t.designation}, {t.company}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Testimonial ${i + 1}`}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-300",
+                  i === current ? "bg-harvest w-6" : "bg-cream/20 hover:bg-cream/40"
+                )}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
