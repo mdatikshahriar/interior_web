@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Play } from "lucide-react";
 
 export default function VideoSection() {
   const [playing, setPlaying] = useState(false);
@@ -50,17 +51,8 @@ export default function VideoSection() {
                 aria-label="Play video"
                 className="absolute inset-0 flex items-center justify-center group"
               >
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-harvest text-soil flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#aa0000] transition-all duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="ml-1"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-harvest text-soil flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#9B2D21] transition-all duration-300">
+                  <Play size={28} fill="currentColor" className="ml-1" />
                 </div>
               </button>
             </>

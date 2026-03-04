@@ -11,10 +11,10 @@ const config: Config = {
     extend: {
       colors: {
         soil: "#0D0D0D",
-        harvest: "#CC0000",
+        harvest: "#C1392B",
         cream: "#FFFFFF",
         linen: "#F2F2F2",
-        moss: "#991111",
+        moss: "#9B2D21",
         stone: "#6B6B6B",
       },
       fontFamily: {

@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       aria-label="Toggle dark mode"
       className="relative w-11 h-6 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-harvest"
       style={{
-        backgroundColor: isDark ? "#CC0000" : "#6B6B6B",
+        backgroundColor: isDark ? "#C1392B" : "#6B6B6B",
       }}
     >
       <span

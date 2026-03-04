@@ -3,17 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LayoutGrid, Home, Building2, TreePine, ArrowRight, type LucideIcon } from "lucide-react";
 import { projects } from "@/lib/data/projects";
 import { formatCategory } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 type Filter = "all" | "residential" | "commercial" | "farm-nature";
 
-const filters: { value: Filter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "residential", label: "Residential" },
-  { value: "commercial", label: "Commercial" },
-  { value: "farm-nature", label: "Farm & Nature" },
+const filters: { value: Filter; label: string; icon: LucideIcon }[] = [
+  { value: "all", label: "All", icon: LayoutGrid },
+  { value: "residential", label: "Residential", icon: Home },
+  { value: "commercial", label: "Commercial", icon: Building2 },
+  { value: "farm-nature", label: "Farm & Nature", icon: TreePine },
 ];
 
 export default function PortfolioPreview() {
@@ -37,9 +38,9 @@ export default function PortfolioPreview() {
           </div>
           <Link
             href="/portfolio"
-            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#aa0000] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
+            className="inline-flex items-center gap-1.5 font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#9B2D21] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
           >
-            View All Projects →
+            View All Projects <ArrowRight size={13} />
           </Link>
         </div>
 
@@ -50,12 +51,13 @@ export default function PortfolioPreview() {
               key={f.value}
               onClick={() => setActive(f.value)}
               className={cn(
-                "font-montserrat text-[11px] uppercase tracking-widest px-4 py-2 border transition-all duration-200",
+                "inline-flex items-center gap-1.5 font-montserrat text-[11px] uppercase tracking-widest px-4 py-2 border transition-all duration-200",
                 active === f.value
                   ? "bg-harvest text-soil border-harvest"
                   : "border-harvest/30 text-stone dark:text-stone hover:border-harvest hover:text-harvest"
               )}
             >
+              <f.icon size={13} />
               {f.label}
             </button>
           ))}

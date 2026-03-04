@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -179,14 +180,14 @@ export default function HeroSlider() {
         aria-label="Previous slide"
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border border-cream/30 flex items-center justify-center text-cream hover:border-harvest hover:text-harvest transition-all duration-200"
       >
-        ←
+        <ChevronLeft size={20} />
       </button>
       <button
         onClick={next}
         aria-label="Next slide"
         className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border border-cream/30 flex items-center justify-center text-cream hover:border-harvest hover:text-harvest transition-all duration-200"
       >
-        →
+        <ChevronRight size={20} />
       </button>
 
       {/* Slide counter */}

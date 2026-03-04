@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -173,7 +174,7 @@ export default function PricingSection() {
                       key={f}
                       className="flex items-start gap-3 font-raleway text-sm text-stone dark:text-stone"
                     >
-                      <span className="text-harvest mt-0.5 text-base leading-none">✓</span>
+                      <Check size={14} className="text-harvest mt-0.5 shrink-0" />
                       {f}
                     </li>
                   ))}

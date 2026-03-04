@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Home, Building2, Hotel, TreePine, Wrench, MessageCircle, ArrowRight, type LucideIcon } from "lucide-react";
 import { services } from "@/lib/data/services";
+
+const serviceIcons: LucideIcon[] = [Home, Building2, Hotel, TreePine, Wrench, MessageCircle];
 
 export default function ServicesShowcase() {
   return (
@@ -20,15 +23,17 @@ export default function ServicesShowcase() {
           </div>
           <Link
             href="/services"
-            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#aa0000] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
+            className="inline-flex items-center gap-1.5 font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#9B2D21] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
           >
-            View All Services →
+            View All Services <ArrowRight size={13} />
           </Link>
         </div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
+          {services.map((service, i) => {
+            const Icon = serviceIcons[i];
+            return (
             <Link
               key={service.id}
               href={`/services#${service.id}`}
@@ -49,7 +54,7 @@ export default function ServicesShowcase() {
               {/* Content */}
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
                 {/* Icon */}
-                <span className="text-3xl mb-3 block">{service.icon}</span>
+                <div className="mb-3 text-harvest"><Icon size={28} /></div>
 
                 {/* Title */}
                 <h3 className="font-playfair font-bold text-cream text-xl md:text-2xl mb-2">
@@ -62,12 +67,13 @@ export default function ServicesShowcase() {
                 </p>
 
                 {/* CTA arrow */}
-                <span className="font-montserrat text-harvest text-xs uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Learn More →
+                <span className="inline-flex items-center gap-1.5 font-montserrat text-harvest text-xs uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Learn More <ArrowRight size={12} />
                 </span>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

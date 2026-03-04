@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Leaf, Sparkles, Palette, Handshake, ShieldCheck, Trophy, type LucideIcon } from "lucide-react";
 import { coreValues } from "@/lib/data/services";
+
+const valueIcons: LucideIcon[] = [Leaf, Sparkles, Palette, Handshake, ShieldCheck, Trophy];
 
 export default function CoreValues() {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,7 +34,9 @@ export default function CoreValues() {
 
         {/* Cards */}
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {coreValues.map((value, i) => (
+          {coreValues.map((value, i) => {
+            const Icon = valueIcons[i];
+            return (
             <div
               key={value.title}
               className={`group bg-cream dark:bg-soil p-8 border border-harvest/10 hover:border-harvest transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
@@ -39,7 +44,7 @@ export default function CoreValues() {
               }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <span className="text-4xl mb-5 block">{value.icon}</span>
+              <div className="mb-5 text-harvest"><Icon size={32} /></div>
               <h3 className="font-playfair font-bold text-xl text-soil dark:text-cream mb-3 group-hover:text-harvest transition-colors">
                 {value.title}
               </h3>
@@ -47,7 +52,8 @@ export default function CoreValues() {
                 {value.description}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

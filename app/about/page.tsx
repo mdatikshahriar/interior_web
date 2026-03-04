@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -135,7 +136,9 @@ export default function AboutPage() {
                   </div>
                   {/* Dot */}
                   <div className="hidden md:flex w-0 justify-center relative">
-                    <div className="w-3 h-3 rounded-full bg-harvest absolute left-1/2 -translate-x-1/2" />
+                    <div className="w-5 h-5 rounded-full bg-harvest absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+                      <ChevronRight size={12} className="text-soil" />
+                    </div>
                   </div>
                   <div className="md:w-1/2" />
                 </div>

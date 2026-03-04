@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { FolderOpen, Users, Clock, Award } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const stats = [
-  { value: 350, label: "Projects Completed", suffix: "+" },
-  { value: 200, label: "Happy Clients", suffix: "+" },
-  { value: 15, label: "Years Experience", suffix: "" },
-  { value: 12, label: "Design Awards", suffix: "" },
+  { value: 350, label: "Projects Completed", suffix: "+", icon: FolderOpen },
+  { value: 200, label: "Happy Clients", suffix: "+", icon: Users },
+  { value: 15, label: "Years Experience", suffix: "", icon: Clock },
+  { value: 12, label: "Design Awards", suffix: "", icon: Award },
 ];
 
 function CountUp({
@@ -113,6 +114,7 @@ export default function AboutSection() {
             <div className="grid grid-cols-2 gap-6 mb-8">
               {stats.map((stat) => (
                 <div key={stat.label}>
+                  <stat.icon size={22} className="text-harvest mb-2" />
                   <p className="font-playfair font-black text-3xl text-harvest mb-1">
                     <CountUp target={stat.value} suffix={stat.suffix} active={visible} />
                   </p>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
 
 const footerLinks = {
   Company: [
@@ -36,16 +37,28 @@ export default function Footer() {
               offices, and farm-inspired sanctuaries across Bangladesh.
             </p>
             <div className="flex gap-4">
-              {["Instagram", "Facebook", "LinkedIn", "Behance"].map((s) => (
+              {[
+                { icon: Instagram, label: "Instagram" },
+                { icon: Facebook, label: "Facebook" },
+                { icon: Linkedin, label: "LinkedIn" },
+              ].map(({ icon: Icon, label }) => (
                 <a
-                  key={s}
+                  key={label}
                   href="#"
                   rel="noopener noreferrer"
-                  className="font-montserrat text-[10px] uppercase tracking-wider text-cream/40 hover:text-harvest transition-colors"
+                  aria-label={label}
+                  className="text-cream/40 hover:text-harvest transition-colors"
                 >
-                  {s}
+                  <Icon size={18} />
                 </a>
               ))}
+              <a
+                href="#"
+                rel="noopener noreferrer"
+                className="font-montserrat text-[10px] uppercase tracking-wider text-cream/40 hover:text-harvest transition-colors self-center"
+              >
+                Bē
+              </a>
             </div>
           </div>
 
@@ -73,9 +86,9 @@ export default function Footer() {
 
         {/* Contact strip */}
         <div className="mt-12 pt-8 border-t border-cream/10 flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-raleway text-cream/50">
-          <span>📍 House 12, Road 4, Gulshan-1, Dhaka 1212</span>
-          <span>📞 +880 1XXX-XXXXXX</span>
-          <span>✉️ hello@afradcorporation.com</span>
+          <span className="flex items-center gap-2"><MapPin size={14} className="text-harvest shrink-0" /> House 12, Road 4, Gulshan-1, Dhaka 1212</span>
+          <span className="flex items-center gap-2"><Phone size={14} className="text-harvest shrink-0" /> +880 1XXX-XXXXXX</span>
+          <span className="flex items-center gap-2"><Mail size={14} className="text-harvest shrink-0" /> hello@afradcorporation.com</span>
         </div>
 
         {/* Bottom bar */}

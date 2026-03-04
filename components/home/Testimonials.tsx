@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { Star } from "lucide-react";
 import { testimonials } from "@/lib/data/testimonials";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +52,7 @@ export default function Testimonials() {
                 {/* Stars */}
                 <div className="flex gap-1 mb-5">
                   {Array.from({ length: t.rating }).map((_, j) => (
-                    <span key={j} className="star-filled text-xl">★</span>
+                    <Star key={j} size={16} className="text-harvest fill-harvest" />
                   ))}
                 </div>
 

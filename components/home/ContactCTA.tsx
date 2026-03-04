@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MapPin, Phone, Mail, Clock, CheckCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 export default function ContactCTA() {
@@ -66,13 +67,13 @@ export default function ContactCTA() {
 
             <div className="space-y-5">
               {[
-                { icon: "📍", label: "Address", value: "House 12, Road 4, Gulshan-1, Dhaka" },
-                { icon: "📞", label: "Phone", value: "+880 1XXX-XXXXXX" },
-                { icon: "✉️", label: "Email", value: "hello@afradcorporation.com" },
-                { icon: "🕒", label: "Hours", value: "Sat–Thu, 9am – 7pm" },
+                { icon: MapPin, label: "Address", value: "House 12, Road 4, Gulshan-1, Dhaka" },
+                { icon: Phone, label: "Phone", value: "+880 1XXX-XXXXXX" },
+                { icon: Mail, label: "Email", value: "hello@afradcorporation.com" },
+                { icon: Clock, label: "Hours", value: "Sat–Thu, 9am – 7pm" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
-                  <span className="text-2xl mt-0.5">{item.icon}</span>
+                  <item.icon size={20} className="text-harvest mt-0.5 shrink-0" />
                   <div>
                     <p className="font-montserrat text-[11px] uppercase tracking-widest text-harvest mb-0.5">
                       {item.label}
@@ -89,7 +90,7 @@ export default function ContactCTA() {
             {status === "success" ? (
               <div className="h-full flex items-center justify-center border border-harvest/20 p-10 text-center">
                 <div>
-                  <span className="text-5xl block mb-4">✓</span>
+                  <CheckCircle size={56} className="text-harvest mx-auto mb-4" />
                   <h3 className="font-playfair text-2xl text-harvest mb-2">
                     Message Received!
                   </h3>

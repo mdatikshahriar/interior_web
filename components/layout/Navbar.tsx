@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -89,13 +90,11 @@ export default function Navbar() {
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
               className={cn(
-                "lg:hidden flex flex-col gap-1.5 p-1",
+                "lg:hidden p-1 transition-colors",
                 scrolled ? "text-soil dark:text-cream" : "text-cream"
               )}
             >
-              <span className="block w-6 h-0.5 bg-current transition-all" />
-              <span className="block w-6 h-0.5 bg-current transition-all" />
-              <span className="block w-4 h-0.5 bg-current transition-all" />
+              <Menu size={22} />
             </button>
           </div>
         </div>
@@ -123,9 +122,9 @@ export default function Navbar() {
           <button
             onClick={() => setDrawerOpen(false)}
             aria-label="Close menu"
-            className="text-soil dark:text-cream hover:text-harvest transition-colors text-2xl leading-none"
+            className="text-soil dark:text-cream hover:text-harvest transition-colors"
           >
-            ✕
+            <X size={20} />
           </button>
         </div>
 
