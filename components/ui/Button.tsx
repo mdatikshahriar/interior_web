@@ -27,11 +27,11 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-harvest text-soil hover:bg-[#b8954a] hover:-translate-y-0.5 hover:shadow-lg",
+      "bg-harvest text-cream hover:bg-[#aa0000] hover:-translate-y-0.5 hover:shadow-lg",
     outline:
-      "border-2 border-harvest text-harvest hover:bg-harvest hover:text-soil hover:-translate-y-0.5",
+      "border-2 border-harvest text-harvest hover:bg-harvest hover:text-cream hover:-translate-y-0.5",
     ghost:
-      "text-harvest hover:text-[#b8954a] hover:underline underline-offset-4",
+      "text-harvest hover:text-[#aa0000] hover:underline underline-offset-4",
   };
 
   const sizes = {

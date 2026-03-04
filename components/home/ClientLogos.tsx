@@ -4,7 +4,7 @@ export default function ClientLogos() {
   const doubled = [...clientLogos, ...clientLogos];
 
   return (
-    <section className="py-16 bg-linen dark:bg-[#3d2a1a] border-y border-harvest/10 overflow-hidden">
+    <section className="py-16 bg-linen dark:bg-[#1a1a1a] border-y border-harvest/10 overflow-hidden">
       <div className="mb-8 text-center">
         <p className="font-montserrat text-stone text-xs uppercase tracking-[0.3em]">
           Trusted By

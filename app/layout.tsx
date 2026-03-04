@@ -79,7 +79,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${montserrat.variable} ${raleway.variable}`}
     >
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           <main>{children}</main>
           <Footer />

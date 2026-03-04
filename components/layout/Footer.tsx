@@ -40,6 +40,7 @@ export default function Footer() {
                 <a
                   key={s}
                   href="#"
+                  rel="noopener noreferrer"
                   className="font-montserrat text-[10px] uppercase tracking-wider text-cream/40 hover:text-harvest transition-colors"
                 >
                   {s}
@@ -81,8 +82,8 @@ export default function Footer() {
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-montserrat text-cream/30 uppercase tracking-wider">
           <span>© {new Date().getFullYear()} Afrad Corporation. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-harvest transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-harvest transition-colors">Terms of Service</a>
+            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">Privacy Policy</a>
+            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

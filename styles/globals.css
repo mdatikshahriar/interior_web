@@ -3,28 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --color-soil: #2C1F14;
-  --color-harvest: #C8A96E;
-  --color-cream: #FAF6EF;
-  --color-linen: #F0E8D8;
-  --color-moss: #4A5C3F;
-  --color-stone: #7A7268;
+  --color-soil: #0D0D0D;
+  --color-harvest: #CC0000;
+  --color-cream: #FFFFFF;
+  --color-linen: #F2F2F2;
+  --color-moss: #991111;
+  --color-stone: #6B6B6B;
 
+  /* Light mode: white bg, black text */
   --bg-primary: var(--color-cream);
   --bg-secondary: var(--color-linen);
   --text-primary: var(--color-soil);
   --text-secondary: var(--color-stone);
   --accent: var(--color-harvest);
-  --accent-green: var(--color-moss);
+  --accent-secondary: var(--color-moss);
 }
 
 .dark {
+  /* Dark mode: black bg, white text */
   --bg-primary: var(--color-soil);
-  --bg-secondary: #3d2a1a;
+  --bg-secondary: #1a1a1a;
   --text-primary: var(--color-cream);
-  --text-secondary: #b8aa9e;
+  --text-secondary: #a0a0a0;
   --accent: var(--color-harvest);
-  --accent-green: #6a8c5f;
+  --accent-secondary: #bb2222;
 }
 
 * {
@@ -188,7 +190,7 @@ body {
   right: 0;
   border-width: 8px 8px 0 0;
   border-style: solid;
-  border-color: #a07840 transparent transparent transparent;
+  border-color: #990000 transparent transparent transparent;
 }
 
 /* Star rating */

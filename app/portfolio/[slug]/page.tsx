@@ -92,7 +92,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              <div className="bg-linen dark:bg-[#3d2a1a] p-6">
+              <div className="bg-linen dark:bg-[#1a1a1a] p-6">
                 <h3 className="font-montserrat text-xs uppercase tracking-widest text-harvest mb-5">
                   Project Details
                 </h3>

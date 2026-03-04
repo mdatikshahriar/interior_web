@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.claude/
 out/
 build/
 .env
@@ -11,3 +12,5 @@ build/
 .DS_Store
 Thumbs.db
 npm-debug.log*
+
+.vercel

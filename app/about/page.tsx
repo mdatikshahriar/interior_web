@@ -104,7 +104,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 md:py-28 bg-linen dark:bg-[#3d2a1a]">
+      <section className="py-20 md:py-28 bg-linen dark:bg-[#1a1a1a]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-8">
           <div className="text-center mb-14">
             <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">

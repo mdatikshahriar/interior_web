@@ -29,6 +29,8 @@ export default function VideoSection() {
               title="Afrad Corporation Design Process"
               allow="autoplay; encrypted-media"
               allowFullScreen
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="w-full h-full"
             />
           ) : (
@@ -48,7 +50,7 @@ export default function VideoSection() {
                 aria-label="Play video"
                 className="absolute inset-0 flex items-center justify-center group"
               >
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-harvest text-soil flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#b8954a] transition-all duration-300">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-harvest text-soil flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#aa0000] transition-all duration-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="28"

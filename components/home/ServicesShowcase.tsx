@@ -20,7 +20,7 @@ export default function ServicesShowcase() {
           </div>
           <Link
             href="/services"
-            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#b8954a] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
+            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#aa0000] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
           >
             View All Services →
           </Link>

@@ -16,11 +16,22 @@ export default function ContactCTA() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    // Trim all fields before sending
+    const payload = {
+      name:        form.name.trim(),
+      phone:       form.phone.trim(),
+      email:       form.email.trim(),
+      projectType: form.projectType,
+      message:     form.message.trim(),
+    };
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         setStatus("success");

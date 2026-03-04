@@ -144,7 +144,7 @@ export default function PricingSection() {
                 "relative border flex flex-col",
                 plan.highlighted
                   ? "border-harvest bg-harvest/5 dark:bg-harvest/10 shadow-xl"
-                  : "border-harvest/20 bg-white dark:bg-[#3d2a1a]"
+                  : "border-harvest/20 bg-white dark:bg-[#1a1a1a]"
               )}
             >
               {/* Ribbon */}

@@ -23,7 +23,7 @@ export default function PortfolioPreview() {
     active === "all" ? projects.slice(0, 6) : projects.filter((p) => p.category === active);
 
   return (
-    <section className="py-20 md:py-28 bg-linen dark:bg-[#3d2a1a]">
+    <section className="py-20 md:py-28 bg-linen dark:bg-[#1a1a1a]">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
@@ -37,7 +37,7 @@ export default function PortfolioPreview() {
           </div>
           <Link
             href="/portfolio"
-            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#b8954a] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
+            className="font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#aa0000] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
           >
             View All Projects →
           </Link>

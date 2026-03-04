@@ -10,12 +10,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        soil: "#2C1F14",
-        harvest: "#C8A96E",
-        cream: "#FAF6EF",
-        linen: "#F0E8D8",
-        moss: "#4A5C3F",
-        stone: "#7A7268",
+        soil: "#0D0D0D",
+        harvest: "#CC0000",
+        cream: "#FFFFFF",
+        linen: "#F2F2F2",
+        moss: "#991111",
+        stone: "#6B6B6B",
       },
       fontFamily: {
         playfair: ["var(--font-playfair)", "Georgia", "serif"],
