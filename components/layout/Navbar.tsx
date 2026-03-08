@@ -5,21 +5,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/contact", label: "Contact" },
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/",          label: t.nav.home },
+    { href: "/about",     label: t.nav.about },
+    { href: "/services",  label: t.nav.services },
+    { href: "/portfolio", label: t.nav.portfolio },
+    { href: "/pricing",   label: t.nav.pricing },
+    { href: "/contact",   label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -50,7 +53,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex flex-col leading-tight">
             <span className="font-playfair font-bold text-xl md:text-2xl text-harvest">
-              Afrad
+              {t.brand.name}
             </span>
             <span
               className={cn(
@@ -58,7 +61,7 @@ export default function Navbar() {
                 scrolled ? "text-soil dark:text-cream" : "text-cream"
               )}
             >
-              Corporation
+              {t.brand.tagline}
             </span>
           </Link>
 
@@ -83,12 +86,13 @@ export default function Navbar() {
           </nav>
 
           {/* Right controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
             <ThemeToggle />
             {/* Hamburger */}
             <button
               onClick={() => setDrawerOpen(true)}
-              aria-label="Open menu"
+              aria-label={t.nav.openMenu}
               className={cn(
                 "lg:hidden p-1 transition-colors",
                 scrolled ? "text-soil dark:text-cream" : "text-cream"
@@ -118,10 +122,10 @@ export default function Navbar() {
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between p-6 border-b border-harvest/20">
-          <span className="font-playfair text-xl text-harvest font-bold">Afrad Corporation</span>
+          <span className="font-playfair text-xl text-harvest font-bold">{t.brand.name} {t.brand.tagline}</span>
           <button
             onClick={() => setDrawerOpen(false)}
-            aria-label="Close menu"
+            aria-label={t.nav.closeMenu}
             className="text-soil dark:text-cream hover:text-harvest transition-colors"
           >
             <X size={20} />
@@ -149,9 +153,13 @@ export default function Navbar() {
 
         {/* Drawer footer */}
         <div className="p-6 border-t border-harvest/20">
-          <div className="flex items-center justify-between mb-4">
-            <span className="font-raleway text-sm text-stone dark:text-stone">Dark Mode</span>
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-raleway text-sm text-stone dark:text-stone">{t.nav.darkMode}</span>
             <ThemeToggle />
+          </div>
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-raleway text-sm text-stone dark:text-stone">{t.nav.language}</span>
+            <LanguageToggle />
           </div>
           <div className="flex gap-4">
             {["Instagram", "Facebook", "LinkedIn"].map((s) => (

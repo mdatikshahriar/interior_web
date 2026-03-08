@@ -5,41 +5,21 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { images } from "@/lib/content/images";
 
-const slides = [
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=90",
-    tagline: "Where Nature",
-    tagline2: "Meets Design",
-    sub: "Creating timeless interiors that blend organic beauty with modern elegance.",
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=90",
-    tagline: "Luxury Living",
-    tagline2: "Reimagined",
-    sub: "Bespoke residential spaces crafted to reflect your unique lifestyle.",
-  },
-  {
-    id: 3,
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=90",
-    tagline: "Spaces That",
-    tagline2: "Inspire",
-    sub: "Commercial interiors designed to energize teams and impress clients.",
-  },
-  {
-    id: 4,
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=90",
-    tagline: "Farm & Nature",
-    tagline2: "Brought Inside",
-    sub: "Our signature biophilic design brings the outdoors into every space.",
-  },
+const slideImages = [
+  images.hero.slide1,
+  images.hero.slide2,
+  images.hero.slide3,
+  images.hero.slide4,
 ];
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const { t } = useLanguage();
+  const slides = t.hero.slides;
 
   const goTo = useCallback(
     (index: number) => {
@@ -51,10 +31,10 @@ export default function HeroSlider() {
     [animating]
   );
 
-  const next = useCallback(() => goTo((current + 1) % slides.length), [current, goTo]);
+  const next = useCallback(() => goTo((current + 1) % slides.length), [current, goTo, slides.length]);
   const prev = useCallback(
     () => goTo((current - 1 + slides.length) % slides.length),
-    [current, goTo]
+    [current, goTo, slides.length]
   );
 
   // Auto-advance every 6s
@@ -68,24 +48,24 @@ export default function HeroSlider() {
   return (
     <section className="relative h-screen min-h-[600px] overflow-hidden">
       {/* Background images */}
-      {slides.map((s, i) => (
+      {slideImages.map((img, i) => (
         <div
-          key={s.id}
+          key={i}
           className={cn(
             "absolute inset-0 transition-opacity duration-700",
             i === current ? "opacity-100" : "opacity-0"
           )}
         >
           <Image
-            src={s.image}
-            alt={s.tagline}
+            src={img}
+            alt={slides[i]?.tagline ?? ""}
             fill
             priority={i === 0}
             className={cn(
               "object-cover",
               i === current ? "hero-scale" : ""
             )}
-            key={`${s.id}-${i === current}`} // re-mount to restart animation
+            key={`${i}-${i === current}`}
           />
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-soil/80 via-soil/50 to-transparent" />
@@ -98,7 +78,7 @@ export default function HeroSlider() {
           <div key={current} className="max-w-2xl">
             {/* Pre-title */}
             <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-4 fade-in">
-              Afrad Corporation
+              {t.hero.pretitle}
             </p>
 
             {/* Main title */}
@@ -149,10 +129,10 @@ export default function HeroSlider() {
               }}
             >
               <Button href="/portfolio" size="lg">
-                Explore Projects
+                {t.hero.cta1}
               </Button>
               <Button href="/contact" variant="outline" size="lg">
-                Get a Quote
+                {t.hero.cta2}
               </Button>
             </div>
           </div>

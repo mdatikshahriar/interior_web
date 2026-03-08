@@ -3,13 +3,21 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { testimonials } from "@/lib/data/testimonials";
+import { testimonialsMeta } from "@/lib/data/testimonials";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
+
+  // Merge avatar/rating (structural) with translated text
+  const testimonials = testimonialsMeta.map((m) => ({
+    ...m,
+    ...t.testimonials.items.find((i) => i.id === m.id)!,
+  }));
 
   useEffect(() => {
     if (paused) return;
@@ -17,7 +25,7 @@ export default function Testimonials() {
       setCurrent((c) => (c + 1) % testimonials.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, [paused]);
+  }, [paused, testimonials.length]);
 
   return (
     <section
@@ -29,19 +37,19 @@ export default function Testimonials() {
         {/* Header */}
         <div className="text-center mb-14">
           <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
-            What Clients Say
+            {t.testimonials.pretitle}
           </p>
           <h2 className="font-playfair font-bold text-cream text-4xl md:text-5xl">
-            Testimonials
+            {t.testimonials.heading}
           </h2>
         </div>
 
         {/* Slider */}
         <div ref={ref} className="max-w-3xl mx-auto text-center">
           <div className="relative min-h-[260px]">
-            {testimonials.map((t, i) => (
+            {testimonials.map((item, i) => (
               <div
-                key={t.id}
+                key={item.id}
                 className={cn(
                   "absolute inset-0 transition-all duration-500 flex flex-col items-center justify-center",
                   i === current
@@ -51,27 +59,27 @@ export default function Testimonials() {
               >
                 {/* Stars */}
                 <div className="flex gap-1 mb-5">
-                  {Array.from({ length: t.rating }).map((_, j) => (
+                  {Array.from({ length: item.rating }).map((_, j) => (
                     <Star key={j} size={16} className="text-harvest fill-harvest" />
                   ))}
                 </div>
 
                 {/* Quote */}
                 <blockquote className="font-playfair text-lg md:text-xl text-cream/90 leading-relaxed italic mb-8">
-                  &ldquo;{t.quote}&rdquo;
+                  &ldquo;{item.quote}&rdquo;
                 </blockquote>
 
                 {/* Avatar + info */}
                 <div className="flex items-center gap-4">
                   <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-harvest">
-                    <Image src={t.avatar} alt={t.name} fill className="object-cover" />
+                    <Image src={item.avatar} alt={item.name} fill className="object-cover" />
                   </div>
                   <div className="text-left">
                     <p className="font-montserrat text-sm font-semibold text-harvest">
-                      {t.name}
+                      {item.name}
                     </p>
                     <p className="font-raleway text-xs text-cream/50">
-                      {t.designation}, {t.company}
+                      {item.designation}, {item.company}
                     </p>
                   </div>
                 </div>

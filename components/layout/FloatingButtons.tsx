@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { links } from "@/lib/content/links";
 
 export default function FloatingButtons() {
   const [visible, setVisible] = useState(false);
@@ -21,16 +22,35 @@ export default function FloatingButtons() {
     >
       {/* Phone */}
       <a
-        href="tel:+8801XXXXXXXXX"
+        href={links.contact.phoneHref}
         aria-label="Call us"
         className="w-12 h-12 rounded-full bg-moss text-white flex items-center justify-center shadow-lg hover:bg-[#3a4a30] hover:scale-110 transition-all duration-200"
       >
         <Phone size={20} />
       </a>
 
+      {/* Messenger */}
+      <a
+        href={links.contact.messenger}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Messenger"
+        className="w-12 h-12 rounded-full bg-[#0084FF] text-white flex items-center justify-center shadow-lg hover:bg-[#006fd6] hover:scale-110 transition-all duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M12 0C5.374 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.626 0 12-4.974 12-11.111S18.626 0 12 0zm1.191 14.963-3.055-3.26-5.963 3.26L10.732 8.1l3.131 3.26L19.752 8.1l-6.561 6.863z" />
+        </svg>
+      </a>
+
       {/* WhatsApp */}
       <a
-        href="https://wa.me/8801XXXXXXXXX"
+        href={links.contact.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"

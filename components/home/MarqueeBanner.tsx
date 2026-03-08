@@ -1,16 +1,10 @@
-const items = [
-  "Afrad Corporation",
-  "Premium Interiors",
-  "Sustainable Spaces",
-  "Farm & Nature Design",
-  "Est. 2010",
-  "Dhaka, Bangladesh",
-  "Award-Winning Team",
-  "Bespoke Solutions",
-];
+"use client";
+
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function MarqueeBanner() {
-  const doubled = [...items, ...items]; // duplicate for seamless loop
+  const { t } = useLanguage();
+  const doubled = [...t.marquee.items, ...t.marquee.items];
 
   return (
     <section className="bg-soil py-4 overflow-hidden">

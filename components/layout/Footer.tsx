@@ -1,24 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
-
-const footerLinks = {
-  Company: [
-    { label: "About Us", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Contact", href: "/contact" },
-  ],
-  Services: [
-    { label: "Residential Design", href: "/services#residential" },
-    { label: "Commercial Spaces", href: "/services#commercial" },
-    { label: "Hospitality Interiors", href: "/services#hospitality" },
-    { label: "Farm & Nature", href: "/services#farm-nature" },
-    { label: "Renovation", href: "/services#renovation" },
-  ],
-};
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { links } from "@/lib/content/links";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-soil text-cream/80">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8 py-16">
@@ -26,25 +15,25 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="mb-4">
-              <span className="font-playfair text-3xl font-bold text-harvest">Afrad</span>
+              <span className="font-playfair text-3xl font-bold text-harvest">{t.brand.name}</span>
               <br />
               <span className="font-montserrat text-xs tracking-[0.3em] uppercase text-cream/60">
-                Corporation
+                {t.brand.tagline}
               </span>
             </div>
             <p className="font-raleway text-sm text-cream/60 leading-relaxed max-w-xs mb-6">
-              Crafting spaces where nature meets design. Interior excellence for homes,
-              offices, and farm-inspired sanctuaries across Bangladesh.
+              {t.footer.tagline}
             </p>
             <div className="flex gap-4">
               {[
-                { icon: Instagram, label: "Instagram" },
-                { icon: Facebook, label: "Facebook" },
-                { icon: Linkedin, label: "LinkedIn" },
-              ].map(({ icon: Icon, label }) => (
+                { icon: Instagram, label: "Instagram", href: links.social.instagram },
+                { icon: Facebook,  label: "Facebook",  href: links.social.facebook },
+                { icon: Linkedin,  label: "LinkedIn",  href: links.social.linkedin },
+              ].map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="text-cream/40 hover:text-harvest transition-colors"
@@ -53,7 +42,7 @@ export default function Footer() {
                 </a>
               ))}
               <a
-                href="#"
+                href={links.social.behance}
                 rel="noopener noreferrer"
                 className="font-montserrat text-[10px] uppercase tracking-wider text-cream/40 hover:text-harvest transition-colors self-center"
               >
@@ -62,41 +51,71 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([section, links]) => (
-            <div key={section}>
-              <h4 className="font-montserrat text-xs uppercase tracking-widest text-harvest mb-5">
-                {section}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="font-raleway text-sm text-cream/60 hover:text-harvest transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Company links */}
+          <div>
+            <h4 className="font-montserrat text-xs uppercase tracking-widest text-harvest mb-5">
+              {t.footer.sections.company}
+            </h4>
+            <ul className="space-y-3">
+              {t.footer.companyLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-raleway text-sm text-cream/60 hover:text-harvest transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services links */}
+          <div>
+            <h4 className="font-montserrat text-xs uppercase tracking-widest text-harvest mb-5">
+              {t.footer.sections.services}
+            </h4>
+            <ul className="space-y-3">
+              {t.footer.serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-raleway text-sm text-cream/60 hover:text-harvest transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Contact strip */}
         <div className="mt-12 pt-8 border-t border-cream/10 flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-raleway text-cream/50">
-          <span className="flex items-center gap-2"><MapPin size={14} className="text-harvest shrink-0" /> House 12, Road 4, Gulshan-1, Dhaka 1212</span>
-          <span className="flex items-center gap-2"><Phone size={14} className="text-harvest shrink-0" /> +880 1XXX-XXXXXX</span>
-          <span className="flex items-center gap-2"><Mail size={14} className="text-harvest shrink-0" /> hello@afradcorporation.com</span>
+          <span className="flex items-center gap-2">
+            <MapPin size={14} className="text-harvest shrink-0" />
+            {links.contact.addressFull}
+          </span>
+          <span className="flex items-center gap-2">
+            <Phone size={14} className="text-harvest shrink-0" />
+            {links.contact.phone}
+          </span>
+          <span className="flex items-center gap-2">
+            <Mail size={14} className="text-harvest shrink-0" />
+            {links.contact.email}
+          </span>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-montserrat text-cream/30 uppercase tracking-wider">
-          <span>© {new Date().getFullYear()} Afrad Corporation. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} {t.brand.name} {t.brand.tagline}. {t.footer.copyright}</span>
           <div className="flex gap-6">
-            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">Privacy Policy</a>
-            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">Terms of Service</a>
+            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">
+              {t.footer.privacyPolicy}
+            </a>
+            <a href="#" rel="noopener noreferrer" className="hover:text-harvest transition-colors">
+              {t.footer.terms}
+            </a>
           </div>
         </div>
       </div>

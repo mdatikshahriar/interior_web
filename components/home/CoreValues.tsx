@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Leaf, Sparkles, Palette, Handshake, ShieldCheck, Trophy, type LucideIcon } from "lucide-react";
-import { coreValues } from "@/lib/data/services";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const valueIcons: LucideIcon[] = [Leaf, Sparkles, Palette, Handshake, ShieldCheck, Trophy];
 
 export default function CoreValues() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,16 +26,16 @@ export default function CoreValues() {
         {/* Header */}
         <div className="text-center mb-14">
           <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
-            Why Choose Us
+            {t.coreValues.pretitle}
           </p>
           <h2 className="font-playfair font-bold text-soil dark:text-cream text-4xl md:text-5xl">
-            Our Core Values
+            {t.coreValues.heading}
           </h2>
         </div>
 
         {/* Cards */}
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {coreValues.map((value, i) => {
+          {t.coreValues.items.map((value, i) => {
             const Icon = valueIcons[i];
             return (
             <div

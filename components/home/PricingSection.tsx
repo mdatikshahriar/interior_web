@@ -4,106 +4,14 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type PricingType = "residential" | "commercial";
 
-const plans = {
-  residential: [
-    {
-      name: "Essential",
-      price: "৳ 45,000",
-      unit: "/ room",
-      tagline: "Perfect for single rooms or small apartments",
-      features: [
-        "Initial consultation (2hrs)",
-        "Mood board & concept",
-        "2D floor plan",
-        "Material recommendations",
-        "1 revision round",
-      ],
-      highlighted: false,
-    },
-    {
-      name: "Signature",
-      price: "৳ 95,000",
-      unit: "/ room",
-      tagline: "Our most popular residential package",
-      features: [
-        "Everything in Essential",
-        "3D visualization renders",
-        "Custom furniture design",
-        "Procurement support",
-        "3 revision rounds",
-        "Site supervision (4 visits)",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Bespoke",
-      price: "Custom",
-      unit: "",
-      tagline: "Full-home transformation with dedicated team",
-      features: [
-        "Everything in Signature",
-        "Dedicated project manager",
-        "Unlimited revisions",
-        "Full procurement",
-        "Weekly site supervision",
-        "1-year after-service support",
-      ],
-      highlighted: false,
-    },
-  ],
-  commercial: [
-    {
-      name: "Essential",
-      price: "৳ 120,000",
-      unit: "/ project",
-      tagline: "Ideal for small offices up to 1,000 sq ft",
-      features: [
-        "Space planning",
-        "Concept presentation",
-        "2D layout drawings",
-        "Material board",
-        "2 revision rounds",
-      ],
-      highlighted: false,
-    },
-    {
-      name: "Signature",
-      price: "৳ 280,000",
-      unit: "/ project",
-      tagline: "Comprehensive package for mid-size spaces",
-      features: [
-        "Everything in Essential",
-        "3D walkthrough renders",
-        "MEP coordination",
-        "Vendor management",
-        "4 revision rounds",
-        "Bi-weekly site visits",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Bespoke",
-      price: "Custom",
-      unit: "",
-      tagline: "Enterprise-level design for large projects",
-      features: [
-        "Everything in Signature",
-        "Dedicated design team",
-        "Brand identity integration",
-        "Full project management",
-        "Unlimited revisions",
-        "Turnkey delivery",
-      ],
-      highlighted: false,
-    },
-  ],
-};
-
 export default function PricingSection() {
   const [type, setType] = useState<PricingType>("residential");
+  const { t } = useLanguage();
+  const plans = t.pricing.plans;
 
   return (
     <section className="py-20 md:py-28 bg-cream dark:bg-soil">
@@ -111,26 +19,29 @@ export default function PricingSection() {
         {/* Header */}
         <div className="text-center mb-10">
           <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
-            Transparent Pricing
+            {t.pricing.pretitle}
           </p>
           <h2 className="font-playfair font-bold text-soil dark:text-cream text-4xl md:text-5xl mb-6">
-            Our Packages
+            {t.pricing.heading}
           </h2>
 
           {/* Toggle */}
           <div className="inline-flex border border-harvest/30 overflow-hidden">
-            {(["residential", "commercial"] as PricingType[]).map((t) => (
+            {([
+              { key: "residential" as PricingType, label: t.pricing.residential },
+              { key: "commercial"  as PricingType, label: t.pricing.commercial  },
+            ]).map(({ key, label }) => (
               <button
-                key={t}
-                onClick={() => setType(t)}
+                key={key}
+                onClick={() => setType(key)}
                 className={cn(
                   "font-montserrat text-xs uppercase tracking-widest px-6 py-2.5 transition-all duration-200",
-                  type === t
+                  type === key
                     ? "bg-harvest text-soil"
                     : "text-stone hover:text-harvest"
                 )}
               >
-                {t}
+                {label}
               </button>
             ))}
           </div>
@@ -150,7 +61,7 @@ export default function PricingSection() {
             >
               {/* Ribbon */}
               {plan.highlighted && (
-                <div className="ribbon font-montserrat">Most Popular</div>
+                <div className="ribbon font-montserrat">{t.pricing.mostPopular}</div>
               )}
 
               <div className="p-8 flex-1 flex flex-col">
@@ -185,7 +96,7 @@ export default function PricingSection() {
                   variant={plan.highlighted ? "primary" : "outline"}
                   className="w-full"
                 >
-                  Get Started
+                  {t.pricing.getStarted}
                 </Button>
               </div>
             </div>

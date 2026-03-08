@@ -7,21 +7,32 @@ import { LayoutGrid, Home, Building2, TreePine, ArrowRight, type LucideIcon } fr
 import { projects } from "@/lib/data/projects";
 import { formatCategory } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Filter = "all" | "residential" | "commercial" | "farm-nature";
-
-const filters: { value: Filter; label: string; icon: LucideIcon }[] = [
-  { value: "all", label: "All", icon: LayoutGrid },
-  { value: "residential", label: "Residential", icon: Home },
-  { value: "commercial", label: "Commercial", icon: Building2 },
-  { value: "farm-nature", label: "Farm & Nature", icon: TreePine },
-];
+const filterIcons: LucideIcon[] = [LayoutGrid, Home, Building2, TreePine];
 
 export default function PortfolioPreview() {
   const [active, setActive] = useState<Filter>("all");
+  const { t } = useLanguage();
+
+  const filters: { value: Filter; label: string; icon: LucideIcon }[] = [
+    { value: "all",         label: t.portfolio.filters.all,         icon: filterIcons[0] },
+    { value: "residential", label: t.portfolio.filters.residential, icon: filterIcons[1] },
+    { value: "commercial",  label: t.portfolio.filters.commercial,  icon: filterIcons[2] },
+    { value: "farm-nature", label: t.portfolio.filters.farmNature,  icon: filterIcons[3] },
+  ];
+
+  // Merge project metadata with translated titles/descriptions
+  const projectsWithText = projects.map((p) => ({
+    ...p,
+    ...t.portfolio.projects.find((tp) => tp.id === p.id)!,
+  }));
 
   const filtered =
-    active === "all" ? projects.slice(0, 6) : projects.filter((p) => p.category === active);
+    active === "all"
+      ? projectsWithText.slice(0, 6)
+      : projectsWithText.filter((p) => p.category === active);
 
   return (
     <section className="py-20 md:py-28 bg-linen dark:bg-[#1a1a1a]">
@@ -30,17 +41,17 @@ export default function PortfolioPreview() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
             <p className="font-montserrat text-harvest text-xs uppercase tracking-[0.3em] mb-3">
-              Our Work
+              {t.portfolio.pretitle}
             </p>
             <h2 className="font-playfair font-bold text-soil dark:text-cream text-4xl md:text-5xl">
-              Featured Projects
+              {t.portfolio.heading}
             </h2>
           </div>
           <Link
             href="/portfolio"
             className="inline-flex items-center gap-1.5 font-montserrat text-xs uppercase tracking-widest text-harvest hover:text-[#9B2D21] transition-colors border-b border-harvest pb-0.5 self-start md:self-auto"
           >
-            View All Projects <ArrowRight size={13} />
+            {t.portfolio.viewAll} <ArrowRight size={13} />
           </Link>
         </div>
 
